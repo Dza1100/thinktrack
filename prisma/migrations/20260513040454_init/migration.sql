@@ -31,7 +31,7 @@ CREATE TABLE "AISettings" (
     "geminiApiKey" TEXT,
     "grokApiKey" TEXT,
     "activeProvider" TEXT NOT NULL DEFAULT 'gemini',
-    "activeModel" TEXT NOT NULL DEFAULT 'gemini-3.1-flash-lite',
+    "activeModel" TEXT NOT NULL DEFAULT 'gemini-2.5-flash',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

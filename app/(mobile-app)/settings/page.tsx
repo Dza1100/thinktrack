@@ -12,7 +12,7 @@ export default function AISettingsPage() {
   const [saving, setSaving] = useState(false);
 
   const [config, setConfig] = useState({
-    activeModel: "gemini-3.1-flash-lite",
+    activeModel: "gemini-2.5-flash",
     cognitiveMode: "BALANCED", // Default mode
     apiKey: "",
   });
@@ -162,7 +162,7 @@ export default function AISettingsPage() {
               }
               className="w-full rounded-[16px] border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-[#6D28D9] focus:ring-4 focus:ring-[#6D28D9]/10 focus:bg-white transition-all text-sm md:text-base font-semibold cursor-pointer appearance-none"
             >
-              <option value="gemini-3.1-flash-lite">Gemini 2.5 Flash</option>
+              <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
             </select>
           </div>
 

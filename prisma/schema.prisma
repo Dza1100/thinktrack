@@ -26,7 +26,6 @@ model User {
   aiSettings       AISettings?
   exerciseResults  ExerciseResult[] 
   
-  // RELASI BARU: Menyimpan Micro-Cheatsheet Skenario A
   microCheatsheets MicroCheatsheet[]
 }
 
