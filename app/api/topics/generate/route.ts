@@ -118,6 +118,14 @@ export async function POST(req: Request) {
       select: { cognitiveMode: true },
     });
 
+    if (!userProfile) {
+      // Jika session tertinggal di browser tetapi user sudah tidak ada di DB
+      return NextResponse.json(
+        { error: "User session invalid. Please log out and log in again." },
+        { status: 401 },
+      );
+    }
+
     // CASTING KE STRING AGAR TYPESCRIPT AMAN DARI ERROR ENUM
     const cognitiveModeStr = String(userProfile?.cognitiveMode || "BALANCED");
 
