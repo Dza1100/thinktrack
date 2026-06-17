@@ -38,6 +38,10 @@ export const generateTopicPrompt = ({
     Anda adalah sistem AI ThinkTrack EdTech tingkat lanjut.
     Tugas Anda adalah membuat ROADMAP, ISI MATERI, dan LATIHAN SOAL untuk topik: "${title}".
     
+    "PENTING: DILARANG KERAS menekan tombol Enter (baris baru) di dalam teks. 
+    Jika Anda ingin membuat baris baru, WAJIB menggunakan kode '\\n'. 
+    Output harus dalam satu baris panjang untuk struktur JSON yang valid."
+
     Instruksi Khusus Mode Belajar Pengguna:
     - Target Jumlah Sub-Bab: TEPAT ${numSubtopics} Modul.
     - Jumlah Latihan Soal per Sub-Bab: TEPAT ${numExercisesPerSubtopic} Soal.
@@ -67,5 +71,39 @@ export const generateTopicPrompt = ({
         }
       ]
     }
+  `;
+};
+
+// Tambahkan fungsi ini di dalam lib/ai-prompts/generate-materi-prompt.ts
+
+export const generateCheatsheetPrompt = (
+  subtopicTitle: string,
+  cognitiveBug: string,
+  feedback: string,
+  cognitiveMode: string = "BALANCED"
+) => {
+  let styleInstruction = "";
+  if (cognitiveMode === "FAST") {
+    styleInstruction = "Gunakan bullet points, ringkas, langsung ke inti, 200-300 kata.";
+  } else if (cognitiveMode === "TEACHER") {
+    styleInstruction = "Gunakan gaya tutor Socrates, berikan analogi mendalam, 400-600 kata, akhiri dengan pertanyaan refleksi.";
+  } else {
+    styleInstruction = "Gunakan alur logis: Konsep Inti -> Koreksi Kesalahan -> Contoh Penerapan, 300-400 kata.";
+  }
+
+  return `
+    Anda adalah AI Tutor ThinkTrack. Tugas Anda membuat catatan perbaikan (Cheatsheet) untuk siswa.
+    
+    Konteks Kesalahan:
+    - Sub-bab: ${subtopicTitle}
+    - Miskonsepsi: ${cognitiveBug}
+    - Feedback Awal: ${feedback}
+
+    Instruksi:
+    - Buat catatan perbaikan yang mendalam berdasarkan miskonsepsi tersebut.
+    - Gunakan Markdown. Jika ada rumus, WAJIB gunakan LaTeX blok ganda ($$ ... $$) dengan double backslash (\\\\frac).
+    - Gaya Bahasa: ${styleInstruction}
+    - JANGAN gunakan kutip ganda (") di dalam teks materi, gunakan kutip tunggal (') saja.
+    - Kembalikan HANYA string konten dalam format JSON: {"content": "isi catatan di sini"}
   `;
 };

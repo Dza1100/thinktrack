@@ -213,27 +213,24 @@ export async function POST(req: Request) {
 
     // 7. Parsing JSON AI
     let cleanedText = rawText.replace(/```json|```/gi, "").trim();
-
-    // AUTO-FIX (Sanitizer): Memperbaiki masalah escape character LaTeX di dalam JSON string.
-    // Kode ini mendeteksi backslash tunggal (\) yang tidak diikuti oleh escape JSON valid (seperti n, t, r, ", dsb)
-    // dan mengubahnya menjadi double backslash (\\) secara otomatis sebelum di-parse.
-    cleanedText = cleanedText.replace(/\\([^"\\/bfnrtu])/g, "\\\\$1");
+    
+    // --- TAMBAHKAN PEMERSIH INI ---
+    // 1. Mengubah karakter Enter literal menjadi \n agar valid JSON
+    cleanedText = cleanedText.replace(/[\r\n]+/g, "\\n");
+    
+    // 2. Memperbaiki masalah escape character jika ada backslash tunggal
+    cleanedText = cleanedText.replace(/\\([^"\\/bfnrtu])/g, '\\\\$1');
+    // ------------------------------
 
     let parsed: any;
-
     try {
       parsed = JSON.parse(cleanedText);
-    } catch {
-      // Fallback index manual jika teks masih ada karakter kotor di ujungnya
+    } catch (e) {
+      console.error("JSON Parse Error:", e);
+      // Fallback manual...
       const start = cleanedText.indexOf("{");
       const end = cleanedText.lastIndexOf("}");
-
-      if (start === -1 || end === -1) {
-        throw new Error("AI output is not valid JSON");
-      }
-
-      const slicedText = cleanedText.slice(start, end + 1);
-      parsed = JSON.parse(slicedText);
+      parsed = JSON.parse(cleanedText.slice(start, end + 1));
     }
 
     // 8. Simpan Subtopik ke Database

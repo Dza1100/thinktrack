@@ -122,6 +122,5 @@ model MicroCheatsheet {
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   subtopic   Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
 
-  // Memastikan user hanya punya 1 rangkuman per sub-bab yang diupdate
-  @@unique([userId, subtopicId])
+  @@unique([userId, subtopicId]) // Ini wajib ada
 }

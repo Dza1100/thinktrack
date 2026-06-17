@@ -13,15 +13,22 @@ export async function POST(req: Request) {
       Siswa ini memiliki masalah pemahaman (Bug Kognitif): "${bugData.cognitiveBug}".
       
       Aturan ketat:
-      1. JANGAN PERNAH memberikan jawaban langsung.
-      2. Beri pertanyaan pancingan (1-2 kalimat saja) untuk mengarahkan logika siswa.
-      3. Jika kamu mendeteksi bahwa siswa SUDAH PAHAM berdasarkan balasan terakhirnya, berikan penjelasan singkat penutup, lalu set "isResolved" menjadi true dan buatkan "cheatsheet" (catatan kecil).
+      1. JANGAN PERNAH memberikan jawaban langsung jika siswa belum paham.
+      2. Beri pertanyaan pancingan (1-2 kalimat) untuk mengarahkan logika siswa.
+      3. Jika kamu mendeteksi bahwa siswa SUDAH PAHAM, atau ada instruksi "Sistem: Pengguna ingin mengakhiri sesi", berikan penjelasan penutup, set "isResolved" menjadi true, dan buatkan "cheatsheet".
       
+      ATURAN PEMBUATAN CHEATSHEET:
+      - Cheatsheet HARUS PANJANG, JELAS, dan KOMPREHENSIF.
+      - JANGAN HANYA 1 BARIS. Buatlah minimal 3-5 poin materi.
+      - Gunakan format list/bullet points (gunakan tanda - atau * di awal baris).
+      - Berikan penjelasan konsep dasar, diikuti dengan contoh langkah-langkah penyelesaiannya secara logis.
+      - Gunakan karakter newline (\\n) untuk merapikan spasi antar paragraf.
+
       Kamu WAJIB membalas dengan JSON valid:
       {
         "reply": "Balasan chatmu ke siswa",
         "isResolved": boolean,
-        "cheatsheet": "Catatan singkat inti materi (hanya diisi jika isResolved true, jika belum paham isi null)"
+        "cheatsheet": "<Tulis rangkuman lengkap terstruktur di sini. Hanya diisi jika isResolved true, jika belum paham isi null>"
       }
     `;
 
