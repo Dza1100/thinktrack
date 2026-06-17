@@ -160,9 +160,11 @@ export default function AISettingsPage() {
                   activeModel: e.target.value,
                 })
               }
-              className="w-full rounded-[16px] border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-[#6D28D9] focus:ring-4 focus:ring-[#6D28D9]/10 focus:bg-white transition-all text-sm md:text-base font-semibold cursor-pointer appearance-none"
-            >
+              className="w-full rounded-[16px] border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-[#6D28D9] focus:ring-4 focus:ring-[#6D28D9]/10 focus:bg-white transition-all text-sm md:text-base font-semibold cursor-pointer appearance-none">
               <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+              <option value="llama-3.3-70b-versatile">
+                Groq (Llama 3.3 70B)
+              </option>
             </select>
           </div>
 
@@ -191,8 +193,7 @@ export default function AISettingsPage() {
                   cognitiveMode: e.target.value,
                 })
               }
-              className="w-full rounded-[16px] border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:bg-white transition-all text-sm md:text-base font-semibold cursor-pointer appearance-none"
-            >
+              className="w-full rounded-[16px] border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:bg-white transition-all text-sm md:text-base font-semibold cursor-pointer appearance-none">
               <option value="FAST">
                 ⚡ Fast (Singkat, cepat, efisien, 3 Modul Materi)
               </option>
@@ -209,8 +210,7 @@ export default function AISettingsPage() {
           <button
             onClick={saveSettings}
             disabled={saving}
-            className="flex w-full items-center justify-center gap-2 rounded-[20px] bg-gradient-to-r from-[#6D28D9] to-[#8B5CF6] py-5 font-extrabold text-lg text-white transition-all shadow-[0_10px_30px_rgba(109,40,217,0.25)] hover:shadow-[0_15px_40px_rgba(109,40,217,0.35)] hover:-translate-y-1 hover:scale-[1.01] disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:scale-100 disabled:shadow-none mt-10"
-          >
+            className="flex w-full items-center justify-center gap-2 rounded-[20px] bg-gradient-to-r from-[#6D28D9] to-[#8B5CF6] py-5 font-extrabold text-lg text-white transition-all shadow-[0_10px_30px_rgba(109,40,217,0.25)] hover:shadow-[0_15px_40px_rgba(109,40,217,0.35)] hover:-translate-y-1 hover:scale-[1.01] disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:scale-100 disabled:shadow-none mt-10">
             <FiSave size={20} />
             {saving ? "Menyimpan Konfigurasi..." : "Simpan Pengaturan"}
           </button>
