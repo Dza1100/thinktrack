@@ -481,16 +481,18 @@ export default function LearnPage({
 
       {/* RENDER MODAL SOCRATES JIKA AKTIF */}
       {activeSocratesBug && (
-        <SocratesChatModal 
-          bugData={activeSocratesBug}
-          userId={dbResults[0]?.userId || "user-id-placeholder"}
-          subtopicId={selectedSubtopicId!}
-          onClose={() => setActiveSocratesBug(null)}
-          onComplete={() => {
-            alert("🎉 Hebat! Micro-Cheatsheet berhasil ditambahkan di ujung Ruang Belajar.");
-          }}
-        />
-      )}
+  <SocratesChatModal 
+    bugData={activeSocratesBug}
+    userId={dbResults[0]?.userId || "user-id-placeholder"}
+    subtopicId={selectedSubtopicId!}
+    onClose={() => setActiveSocratesBug(null)}
+    onComplete={() => {
+      alert("🎉 Hebat! Micro-Cheatsheet berhasil ditambahkan di ujung Ruang Belajar.");
+      // Opsional: Anda bisa memanggil fungsi refresh untuk memuat ulang daftar modul/cheatsheet di sini
+    }}
+    chatMode="learn" // <--- Tambahkan baris ini
+  />
+)}
     </div>
   );
 }
